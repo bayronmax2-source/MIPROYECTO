@@ -1,9 +1,9 @@
-class Medico:
+class Paciente:
 
-    def __init__(self, codigo, nombre, especialidad):
+    def __init__(self, codigo, nombre, edad):
         self.codigo = codigo
         self.nombre = nombre
-        self.especialidad = especialidad
+        self.edad = edad
 
     @property
     def codigo(self):
@@ -28,42 +28,19 @@ class Medico:
             raise ValueError("El nombre debe contener solo letras.")
 
     @property
-    def especialidad(self):
-        return self._especialidad
+    def edad(self):
+        return self._edad
 
-    @especialidad.setter
-    def especialidad(self, valor):
-        self._especialidad = valor
+    @edad.setter
+    def edad(self, valor):
+        if 0 <= valor <= 120:
+            self._edad = valor
+        else:
+            raise ValueError("La edad debe estar entre 0 y 120.")
 
     def resumen(self):
         return (
-            f"Médico: {self.codigo} - "
+            f"Paciente: {self.codigo} - "
             f"{self.nombre} - "
-            f"Especialidad: {self.especialidad}"
+            f"{self.edad} años"
         )
-
-
-def seleccionar_especialidad():
-    while True:
-        print("\n=== ESPECIALIDADES ===")
-        print("1. Medicina General")
-        print("2. Pediatría")
-        print("3. Obstetricia")
-        print("4. Cirugía General")
-        print("5. Nutrición")
-
-        opcion = input("Seleccione una especialidad: ")
-
-        match opcion:
-            case "1":
-                return "Medicina General"
-            case "2":
-                return "Pediatría"
-            case "3":
-                return "Obstetricia"
-            case "4":
-                return "Cirugía General"
-            case "5":
-                return "Nutrición"
-            case _:
-                print("ERROR: Especialidad no válida.")
